@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Autoimmune-Friendly Diet Plan</title>
+<meta name="description" content="Clean, responsive diet plan with anti-inflammatory foods and a full day schedule.">
+
+<style>
+  /* =========
+     Base / Theme
+     ========= */
+  :root{
+    --bg:#0e141b;
+    --panel:#121b24;
+    --ink:#e9f1f7;
+    --muted:#a8bac9;
+    --brand:#22c1b4;
+    --brand-2:#8ecae6;
+    --line:#223343;
+    --chip:#0f2230;
+    --accent-shadow: 0 10px 30px rgba(34,193,180,.25);
+  }
+  :root.light{
+    --bg:#f6fafc;
+    --panel:#ffffff;
+    --ink:#0f1b26;
+    --muted:#506574;
+    --brand:#0ea5a5;
+    --brand-2:#2b84c6;
+    --line:#dfe8ef;
+    --chip:#eff6fb;
+    --accent-shadow: 0 10px 20px rgba(14,165,165,.18);
+  }
+
+  *{ box-sizing:border-box; }
+  html,body{ height:100%; }
+  body{
+    margin:0;
+    font-family: system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Helvetica,Arial,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,sans-serif;
+    background:var(--bg);
+    color:var(--ink);
+    line-height:1.6;
+  }
+  a{ color:inherit; text-decoration:none; }
+
+  /* =========
+     Navbar
+     ========= */
+  .nav{
+    position:sticky; top:0; z-index:50;
+    backdrop-filter: blur(8px);
+    background: color-mix(in oklab, var(--bg) 85%, transparent);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{
+    max-width:1100px; margin:0 auto; padding:10px 16px;
+    display:flex; align-items:center; gap:12px; justify-content:space-between;
+  }
+  .brand{ font-weight:800; letter-spacing:.4px; display:flex; align-items:center; gap:8px; }
+  .brand-badge{
+    width:28px; height:28px; border-radius:8px;
+    display:grid; place-items:center; background:linear-gradient(145deg, var(--brand), var(--brand-2));
+    box-shadow: var(--accent-shadow);
+  }
+  .links{ display:flex; gap:14px; }
+  .links a{ color:var(--muted); padding:8px 10px; border-radius:10px; }
+  .links a:hover{ background:color-mix(in oklab, var(--panel) 80%, transparent); color:var(--ink); }
+  .nav-actions{ display:flex; gap:8px; align-items:center; }
+  .btn{
+    padding:9px 12px; border-radius:10px; border:1px solid var(--line);
+    background: color-mix(in oklab, var(--panel) 90%, transparent);
+    color:var(--ink); cursor:pointer;
+  }
+  .btn.primary{
+    background:linear-gradient(145deg, color-mix(in oklab, var(--brand) 75%, #0b5) , var(--brand));
+    border-color: color-mix(in oklab, var(--brand) 50%, #000);
+  }
+  .theme{
+    display:flex; align-items:center; gap:8px; color:var(--muted); font-size:14px;
+  }
+  .switch{ position:relative; display:inline-block; width:48px; height:26px; }
+  .switch input{ opacity:0; width:0; height:0; }
+  .slider{
+    position:absolute; inset:0; background:#2b3b49; border-radius:40px; transition:.2s;
+  }
+  .slider:before{
+    content:""; position:absolute; width:20px; height:20px; left:3px; top:3px; border-radius:50%;
+    background:#fff; transition:.2s;
+  }
+  .switch input:checked + .slider{ background: var(--brand); }
+  .switch input:checked + .slider:before{ transform:translateX(22px); }
+
+  /* =========
+     Hero
+     ========= */
+  .hero{
+    max-width:1100px; margin:0 auto; padding:28px 16px 14px;
+    display:grid; gap:20px; grid-template-columns: 1.2fr .8fr;
+  }
+  .hero-card{
+    background:linear-gradient(160deg, color-mix(in oklab, var(--panel) 90%, #000) , var(--panel));
+    border:1px solid var(--line); border-radius:16px; padding:20px;
+    box-shadow: var(--accent-shadow);
+  }
+  .hero h1{ font-size: clamp(26px, 5vw, 40px); margin:0 0 6px; }
+  .hero p{ color:var(--muted); margin:0 0 12px; }
+  .hero-grid{ display:grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap:10px; }
+  .kpi{
+    background:var(--chip); border:1px solid var(--line); border-radius:12px; padding:10px;
+    text-align:center;
+  }
+  .kpi b{ display:block; font-size:18px; }
+  .kpi span{ color:var(--muted); font-size:12px; }
+
+  .hero-img{
+    border:1px solid var(--line); border-radius:16px; overflow:hidden;
+    aspect-ratio: 16/10;
+    background:
+      radial-gradient(1400px 500px at -10% -40%, color-mix(in oklab, var(--brand) 40%, transparent), transparent 60%),
+      linear-gradient(145deg, color-mix(in oklab, var(--panel) 85%, #000), var(--panel));
+    position:relative;
+  }
+  .hero-img img{
+    width:100%; height:100%; object-fit:cover; display:block; opacity:.9;
+    mix-blend-mode:luminosity;
+  }
+  .hero-badge{
+    position:absolute; right:14px; bottom:14px; padding:8px 10px; border-radius:10px;
+    background:color-mix(in oklab, var(--panel) 85%, transparent); border:1px solid var(--line); font-size:13px;
+  }
+
+  /* =========
+     Sections
+     ========= */
+  .section{ max-width:1100px; margin:0 auto; padding:24px 16px; }
+  .title{
+    display:flex; align-items:flex-end; justify-content:space-between; gap:10px; margin-bottom:12px;
+  }
+  .title h2{ margin:0; font-size: clamp(20px, 4vw, 28px); }
+  .title p{ margin:0; color:var(--muted); font-size:14px; }
+
+  /* Anti-inflammatory list */
+  .cards{
+    display:grid; gap:14px; grid-template-columns: repeat( auto-fit, minmax(250px, 1fr) );
+  }
+  .card{
+    background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:16px;
+  }
+  .card h3{ margin:0 0 8px; color:var(--brand-2); font-size:18px; }
+  .chips{ display:flex; flex-wrap:wrap; gap:8px; }
+  .chip{
+    background:var(--chip); border:1px solid var(--line); color:var(--ink);
+    padding:6px 10px; border-radius:999px; font-size:13px;
+  }
+
+  /* Meals */
+  .meal-grid{
+    display:grid; gap:14px; grid-template-columns: repeat( auto-fit, minmax(280px, 1fr) );
+  }
+  .meal{
+    background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:16px; position:relative;
+  }
+  .meal h3{ margin:0 0 8px; }
+  .meal ul{ padding-left:18px; margin:0; }
+  .tag{
+    position:absolute; right:12px; top:12px; padding:4px 8px; border-radius:999px;
+    border:1px solid var(--line); font-size:12px; color:var(--muted);
+  }
+
+  /* Gallery */
+  .gallery{
+    display:grid; gap:10px; grid-template-columns: repeat( auto-fit, minmax(220px, 1fr) );
+  }
+  .frame{
+    overflow:hidden; border-radius:14px; border:1px solid var(--line); aspect-ratio: 16/10;
+    background:var(--panel);
+  }
+  .frame img{ width:100%; height:100%; object-fit:cover; display:block; }
+
+  /* Timeline */
+  .timeline{ display:grid; gap:10px; }
+  .t{
+    background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:10px 12px;
+  }
+  .t b{ color:var(--brand); margin-right:6px; }
+
+  /* Footer */
+  footer{ border-top:1px solid var(--line); color:var(--muted); text-align:center; padding:28px 16px; }
+
+  /* Responsive */
+  @media (max-width: 860px){
+    .hero{ grid-template-columns: 1fr; }
+    .links{ display:none; }
+  }
+
+  /* Print */
+  @media print{
+    .nav, .nav *{ display:none !important; }
+    body{ background:#fff; color:#000; }
+    .card,.meal,.t{ border-color:#ccc; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- ======= NAV ======= -->
+  <div class="nav">
+    <div class="nav-inner">
+      <a class="brand" href="#top">
+        <span class="brand-badge">🌿</span> AIDiet
+      </a>
+      <div class="links">
+        <a href="#foods">Foods</a>
+        <a href="#diet">Diet Plan</a>
+        <a href="#schedule">Schedule</a>
+        <a href="#gallery">Images</a>
+      </div>
+      <div class="nav-actions">
+        <div class="theme">
+          <span>Light</span>
+          <label class="switch">
+            <input id="themeToggle" type="checkbox" />
+            <span class="slider"></span>
+          </label>
+          <span>Dark</span>
+        </div>
+        <button class="btn" onclick="window.print()">Print / Save PDF</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======= HERO ======= -->
+  <header class="hero" id="top">
+    <div class="hero-card">
+      <h1>Autoimmune-Friendly Diet Plan</h1>
+      <p>Designed for a 23-year-old female with a 9-5 schedule — focus on steady energy & reduced inflammation.</p>
+      <div class="hero-grid">
+        <div class="kpi"><b>Balanced</b><span>Whole foods first</span></div>
+        <div class="kpi"><b>Anti-Inflam.</b><span>Omega-3, spices</span></div>
+        <div class="kpi"><b>Job-Friendly</b><span>Simple prep</span></div>
+      </div>
+    </div>
+    <div class="hero-img">
+      <!-- Online images for visual vibe; safe to remove if offline -->
+      <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?q=80&w=1200&auto=format&fit=crop" alt="Fresh healthy food" loading="lazy">
+      <div class="hero-badge">Clean • Simple • Nourishing</div>
+    </div>
+  </header>
+
+  <!-- ======= FOODS ======= -->
+  <section class="section" id="foods">
+    <div class="title">
+      <h2>🥦 Anti-inflammatory Foods</h2>
+      <p>Jo roz ke meals me asaani se add ho sake.</p>
+    </div>
+
+    <div class="cards">
+      <article class="card">
+        <h3>Healthy Fats</h3>
+        <div class="chips">
+          <span class="chip">Olive oil</span>
+          <span class="chip">Mustard oil (kam)</span>
+          <span class="chip">Avocado</span>
+          <span class="chip">Flax seeds</span>
+          <span class="chip">Chia seeds</span>
+          <span class="chip">Walnuts</span>
+        </div>
+      </article>
+
+      <article class="card">
+        <h3>Fruits</h3>
+        <div class="chips">
+          <span class="chip">Berries</span>
+          <span class="chip">Papaya</span>
+          <span class="chip">Apple</span>
+          <span class="chip">Orange</span>
+          <span class="chip">Guava</span>
+        </div>
+      </article>
+
+      <article class="card">
+        <h3>Vegetables</h3>
+        <div class="chips">
+          <span class="chip">Broccoli</span>
+          <span class="chip">Spinach</span>
+          <span class="chip">Kale</span>
+          <span class="chip">Beetroot</span>
+          <span class="chip">Carrot</span>
+          <span class="chip">Cucumber</span>
+        </div>
+      </article>
+
+      <article class="card">
+        <h3>Spices</h3>
+        <div class="chips">
+          <span class="chip">Haldi (turmeric)</span>
+          <span class="chip">Adrak (ginger)</span>
+          <span class="chip">Lahsun (garlic)</span>
+        </div>
+      </article>
+
+      <article class="card">
+        <h3>Protein</h3>
+        <div class="chips">
+          <span class="chip">Egg</span>
+          <span class="chip">Salmon</span>
+          <span class="chip">Sardines</span>
+          <span class="chip">Mackerel</span>
+          <span class="chip">Chicken (grilled/boiled)</span>
+        </div>
+      </article>
+
+      <article class="card">
+        <h3>Whole Grains</h3>
+        <div class="chips">
+          <span class="chip">Oats</span>
+          <span class="chip">Quinoa</span>
+          <span class="chip">Brown rice</span>
+          <span class="chip">Multigrain roti</span>
+        </div>
+      </article>
+
+      <article class="card">
+        <h3>Fermented Foods</h3>
+        <div class="chips">
+          <span class="chip">Curd</span>
+          <span class="chip">Buttermilk</span>
+          <span class="chip">Idli</span>
+          <span class="chip">Dosa</span>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ======= DIET PLAN ======= -->
+  <section class="section" id="diet">
+    <div class="title">
+      <h2>🍽 Your Autoimmune-friendly Diet Plan</h2>
+      <p>Non-veg included; options simple & practical.</p>
+    </div>
+
+    <div class="meal-grid">
+      <article class="meal"><span class="tag">7:00 AM</span>
+        <h3>🌅 Morning</h3>
+        <ul>
+          <li>Warm water with lemon</li>
+          <li>4 soaked almonds + 1 walnut</li>
+        </ul>
+      </article>
+
+      <article class="meal"><span class="tag">8:30 AM</span>
+        <h3>🥣 Breakfast</h3>
+        <ul>
+          <li>Option 1: Vegetable oats / poha / upma + 1 boiled egg</li>
+          <li>Option 2: 2 multigrain roti + sabzi + curd</li>
+          <li>1 cup green tea / herbal tea</li>
+        </ul>
+      </article>
+
+      <article class="meal"><span class="tag">11:00 AM</span>
+        <h3>🍎 Mid-morning Snack</h3>
+        <ul>
+          <li>1 fruit (papaya / apple / orange)</li>
+          <li>Handful roasted seeds (pumpkin / sunflower / flax)</li>
+        </ul>
+      </article>
+
+      <article class="meal"><span class="tag">1:30 PM</span>
+        <h3>🍛 Lunch</h3>
+        <ul>
+          <li>2 multigrain rotis / 1 bowl brown rice</li>
+          <li>Dal / chana / rajma</li>
+          <li>Seasonal sabzi (broccoli, spinach, beetroot etc.)</li>
+          <li>Salad (cucumber, carrot, tomato)</li>
+          <li>1 bowl curd</li>
+        </ul>
+      </article>
+
+      <article class="meal"><span class="tag">4:30–5:00 PM</span>
+        <h3>☕ Evening Snack</h3>
+        <ul>
+          <li>Roasted makhana / chana</li>
+          <li>1 cup green tea</li>
+        </ul>
+      </article>
+
+      <article class="meal"><span class="tag">8:00 PM</span>
+        <h3>🍲 Dinner</h3>
+        <ul>
+          <li>Option 1: Soup + grilled veggies + 1 boiled egg / grilled chicken</li>
+          <li>Option 2: 2 rotis + sabzi + dal</li>
+          <li>Option 3: Grilled/steamed salmon or mackerel + sautéed veggies (1–2×/week)</li>
+        </ul>
+      </article>
+
+      <article class="meal"><span class="tag">10:30 PM</span>
+        <h3>🌙 Bedtime</h3>
+        <ul>
+          <li>Warm haldi milk (if it suits you)</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <!-- ======= DAILY SCHEDULE ======= -->
+  <section class="section" id="schedule">
+    <div class="title">
+      <h2>🗓 9–5 Job-friendly Daily Schedule</h2>
+      <p>Chhote steps, big consistency.</p>
+    </div>
+    <div class="timeline">
+      <div class="t"><b>7:00</b> Wake up, warm water, light stretch</div>
+      <div class="t"><b>7:30</b> Walk / Yoga / Light workout (20–30 min)</div>
+      <div class="t"><b>8:30</b> Breakfast</div>
+      <div class="t"><b>11:00</b> Fruit + seeds</div>
+      <div class="t"><b>1:30</b> Lunch</div>
+      <div class="t"><b>4:45</b> Snack + 5-minute stroll</div>
+      <div class="t"><b>6:15</b> Light stretching / short walk</div>
+      <div class="t"><b>8:00</b> Dinner</div>
+      <div class="t"><b>10:30</b> Wind down, haldi milk, sleep routine</div>
+    </div>
+  </section>
+
+  <!-- ======= IMAGE GALLERY ======= -->
+  <section class="section" id="gallery">
+    <div class="title">
+      <h2>📸 Visual Inspiration</h2>
+      <p>Some clean, healthy vibes.</p>
+    </div>
+    <div class="gallery">
+      <figure class="frame">
+        <img alt="Colorful salad bowl" loading="lazy"
+             src="https://images.unsplash.com/photo-1551218808-94e220e084d2?q=80&w=1200&auto=format&fit=crop">
+      </figure>
+      <figure class="frame">
+        <img alt="Grilled fish and veggies" loading="lazy"
+             src="https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=1200&auto=format&fit=crop">
+      </figure>
+      <figure class="frame">
+        <img alt="Overnight oats and fruit" loading="lazy"
+             src="https://images.unsplash.com/photo-1512058564366-18510be2db19?q=80&w=1200&auto=format&fit=crop">
+      </figure>
+      <figure class="frame">
+        <img alt="Green tea" loading="lazy"
+             src="https://images.unsplash.com/photo-1498654200943-1088dd4438ae?q=80&w=1200&auto=format&fit=crop">
+      </figure>
+    </div>
+  </section>
+
+  <footer>
+    Made for you with care • AIDiet 🌿
+  </footer>
+
+<script>
+  // Light/Dark toggle (default: dark)
+  const root = document.documentElement;
+  const toggle = document.getElementById('themeToggle');
+  // If user prefers light, start with light:
+  const preferLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
+  if(preferLight){ root.classList.add('light'); toggle.checked = false; } else { toggle.checked = true; }
+
+  toggle.addEventListener('change', ()=>{
+    if(toggle.checked){ root.classList.remove('light'); }
+    else{ root.classList.add('light'); }
+  });
+</script>
+
+</body>
+</html>
