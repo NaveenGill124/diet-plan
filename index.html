@@ -4,43 +4,36 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Autoimmune-Friendly Diet Plan</title>
-<meta name="description" content="Clean, responsive diet plan with anti-inflammatory foods and a full day schedule.">
+<meta name="description" content="A beautifully designed, responsive diet plan with anti-inflammatory foods.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 
 <style>
   /* =========
      Base / Theme
      ========= */
   :root{
-    --bg:#0e141b;
-    --panel:#121b24;
-    --ink:#e9f1f7;
-    --muted:#a8bac9;
-    --brand:#22c1b4;
-    --brand-2:#8ecae6;
-    --line:#223343;
-    --chip:#0f2230;
-    --accent-shadow: 0 10px 30px rgba(34,193,180,.25);
-  }
-  :root.light{
-    --bg:#f6fafc;
-    --panel:#ffffff;
-    --ink:#0f1b26;
-    --muted:#506574;
-    --brand:#0ea5a5;
-    --brand-2:#2b84c6;
-    --line:#dfe8ef;
-    --chip:#eff6fb;
-    --accent-shadow: 0 10px 20px rgba(14,165,165,.18);
+    --bg: #fff7f9; /* Soft pinkish white */
+    --panel: #ffffff;
+    --ink: #5c374c; /* Dark muted magenta */
+    --muted: #a18696;
+    --brand: #e56b9f; /* Main Pink */
+    --brand-2: #f4a2b8; /* Lighter Pink */
+    --line: #fde8ef;
+    --chip: #fff0f4;
+    --accent-shadow: 0 10px 30px rgba(229, 107, 159, 0.15);
+    --gradient: linear-gradient(145deg, var(--brand), var(--brand-2));
   }
 
   *{ box-sizing:border-box; }
   html,body{ height:100%; }
   body{
     margin:0;
-    font-family: system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Helvetica,Arial,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,sans-serif;
+    font-family: 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, sans-serif;
     background:var(--bg);
     color:var(--ink);
-    line-height:1.6;
+    line-height:1.7;
   }
   a{ color:inherit; text-decoration:none; }
 
@@ -49,422 +42,369 @@
      ========= */
   .nav{
     position:sticky; top:0; z-index:50;
-    backdrop-filter: blur(8px);
-    background: color-mix(in oklab, var(--bg) 85%, transparent);
+    backdrop-filter: blur(10px);
+    background: rgba(255, 247, 249, 0.8);
     border-bottom:1px solid var(--line);
   }
   .nav-inner{
-    max-width:1100px; margin:0 auto; padding:10px 16px;
+    max-width:1100px; margin:0 auto; padding:12px 16px;
     display:flex; align-items:center; gap:12px; justify-content:space-between;
   }
-  .brand{ font-weight:800; letter-spacing:.4px; display:flex; align-items:center; gap:8px; }
+  .brand{ font-weight:700; font-size: 20px; letter-spacing:.4px; display:flex; align-items:center; gap:10px; }
   .brand-badge{
-    width:28px; height:28px; border-radius:8px;
-    display:grid; place-items:center; background:linear-gradient(145deg, var(--brand), var(--brand-2));
+    width:32px; height:32px; border-radius:10px;
+    display:grid; place-items:center; background: var(--gradient);
     box-shadow: var(--accent-shadow);
+    color: white;
   }
-  .links{ display:flex; gap:14px; }
-  .links a{ color:var(--muted); padding:8px 10px; border-radius:10px; }
-  .links a:hover{ background:color-mix(in oklab, var(--panel) 80%, transparent); color:var(--ink); }
-  .nav-actions{ display:flex; gap:8px; align-items:center; }
+  .links{ display:flex; gap:16px; }
+  .links a{
+    color:var(--muted);
+    padding:8px 12px;
+    border-radius:10px;
+    font-weight:600;
+    transition: all .2s;
+  }
+  .links a:hover{ background:var(--chip); color:var(--brand); }
   .btn{
-    padding:9px 12px; border-radius:10px; border:1px solid var(--line);
-    background: color-mix(in oklab, var(--panel) 90%, transparent);
-    color:var(--ink); cursor:pointer;
+    padding:10px 16px;
+    border-radius:12px;
+    border: none;
+    background: var(--gradient);
+    color: white;
+    cursor:pointer;
+    font-weight:600;
+    box-shadow: var(--accent-shadow);
+    transition: all .2s;
   }
-  .btn.primary{
-    background:linear-gradient(145deg, color-mix(in oklab, var(--brand) 75%, #0b5) , var(--brand));
-    border-color: color-mix(in oklab, var(--brand) 50%, #000);
+  .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(229, 107, 159, 0.25);
   }
-  .theme{
-    display:flex; align-items:center; gap:8px; color:var(--muted); font-size:14px;
-  }
-  .switch{ position:relative; display:inline-block; width:48px; height:26px; }
-  .switch input{ opacity:0; width:0; height:0; }
-  .slider{
-    position:absolute; inset:0; background:#2b3b49; border-radius:40px; transition:.2s;
-  }
-  .slider:before{
-    content:""; position:absolute; width:20px; height:20px; left:3px; top:3px; border-radius:50%;
-    background:#fff; transition:.2s;
-  }
-  .switch input:checked + .slider{ background: var(--brand); }
-  .switch input:checked + .slider:before{ transform:translateX(22px); }
+
 
   /* =========
      Hero
      ========= */
   .hero{
-    max-width:1100px; margin:0 auto; padding:28px 16px 14px;
-    display:grid; gap:20px; grid-template-columns: 1.2fr .8fr;
+    max-width:1100px; margin:0 auto; padding:40px 16px 28px;
+    display:grid; gap:24px; grid-template-columns: 1.1fr .9fr;
+    align-items: center;
   }
   .hero-card{
-    background:linear-gradient(160deg, color-mix(in oklab, var(--panel) 90%, #000) , var(--panel));
-    border:1px solid var(--line); border-radius:16px; padding:20px;
-    box-shadow: var(--accent-shadow);
+    background: transparent;
   }
-  .hero h1{ font-size: clamp(26px, 5vw, 40px); margin:0 0 6px; }
-  .hero p{ color:var(--muted); margin:0 0 12px; }
-  .hero-grid{ display:grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap:10px; }
+  h1,h2,h3{ font-family: 'Lora', serif; }
+  .hero h1{ font-size: clamp(32px, 5vw, 48px); margin:0 0 10px; line-height: 1.2; }
+  .hero p{ color:var(--muted); margin:0 0 24px; font-size: 18px; }
+  .hero-grid{ display:grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap:12px; }
   .kpi{
-    background:var(--chip); border:1px solid var(--line); border-radius:12px; padding:10px;
+    background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:16px;
     text-align:center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.03);
   }
-  .kpi b{ display:block; font-size:18px; }
-  .kpi span{ color:var(--muted); font-size:12px; }
+  .kpi b{ display:block; font-size:18px; color: var(--brand); font-weight: 700; }
+  .kpi span{ color:var(--muted); font-size:13px; }
 
   .hero-img{
-    border:1px solid var(--line); border-radius:16px; overflow:hidden;
-    aspect-ratio: 16/10;
-    background:
-      radial-gradient(1400px 500px at -10% -40%, color-mix(in oklab, var(--brand) 40%, transparent), transparent 60%),
-      linear-gradient(145deg, color-mix(in oklab, var(--panel) 85%, #000), var(--panel));
+    border-radius:24px; overflow:hidden;
+    aspect-ratio: 1/1;
     position:relative;
+    box-shadow: var(--accent-shadow);
   }
   .hero-img img{
-    width:100%; height:100%; object-fit:cover; display:block; opacity:.9;
-    mix-blend-mode:luminosity;
+    width:100%; height:100%; object-fit:cover; display:block;
   }
   .hero-badge{
-    position:absolute; right:14px; bottom:14px; padding:8px 10px; border-radius:10px;
-    background:color-mix(in oklab, var(--panel) 85%, transparent); border:1px solid var(--line); font-size:13px;
+    position:absolute; right:16px; bottom:16px; padding:8px 12px; border-radius:10px;
+    background:rgba(255,255,255,0.8); backdrop-filter: blur(5px);
+    border:1px solid var(--line); font-size:14px; font-weight: 600;
   }
 
   /* =========
      Sections
      ========= */
-  .section{ max-width:1100px; margin:0 auto; padding:24px 16px; }
+  .section{ max-width:1100px; margin:0 auto; padding:32px 16px; }
   .title{
-    display:flex; align-items:flex-end; justify-content:space-between; gap:10px; margin-bottom:12px;
+    text-align: center;
+    margin-bottom: 24px;
   }
-  .title h2{ margin:0; font-size: clamp(20px, 4vw, 28px); }
-  .title p{ margin:0; color:var(--muted); font-size:14px; }
+  .title h2{ margin:0; font-size: clamp(24px, 4vw, 36px); }
+  .title p{ margin: 4px 0 0; color:var(--muted); font-size:16px; }
 
   /* Anti-inflammatory list */
   .cards{
-    display:grid; gap:14px; grid-template-columns: repeat( auto-fit, minmax(250px, 1fr) );
+    display:grid; gap:16px; grid-template-columns: repeat( auto-fit, minmax(250px, 1fr) );
   }
   .card{
-    background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:16px;
+    background:var(--panel); border:1px solid var(--line); border-radius:18px; padding:20px;
+    transition: all .2s;
   }
-  .card h3{ margin:0 0 8px; color:var(--brand-2); font-size:18px; }
+  .card:hover{
+      transform: translateY(-4px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+  }
+  .card h3{ margin:0 0 12px; color:var(--brand); font-size:20px; }
   .chips{ display:flex; flex-wrap:wrap; gap:8px; }
   .chip{
-    background:var(--chip); border:1px solid var(--line); color:var(--ink);
-    padding:6px 10px; border-radius:999px; font-size:13px;
+    background:var(--chip); border:1px solid var(--line); color: var(--ink);
+    padding:8px 14px; border-radius:999px; font-size:14px; font-weight: 500;
   }
 
   /* Meals */
   .meal-grid{
-    display:grid; gap:14px; grid-template-columns: repeat( auto-fit, minmax(280px, 1fr) );
+    display:grid; gap:16px; grid-template-columns: repeat( auto-fit, minmax(300px, 1fr) );
   }
   .meal{
-    background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:16px; position:relative;
+    background:var(--panel); border:1px solid var(--line); border-radius:18px; padding:20px;
+    position:relative;
   }
-  .meal h3{ margin:0 0 8px; }
-  .meal ul{ padding-left:18px; margin:0; }
+  .meal h3{ margin:0 0 10px; font-size: 20px; }
+  .meal ul{ padding-left:20px; margin:0; color: var(--muted); }
+  .meal li { margin-bottom: 4px; }
   .tag{
-    position:absolute; right:12px; top:12px; padding:4px 8px; border-radius:999px;
-    border:1px solid var(--line); font-size:12px; color:var(--muted);
+    position:absolute; right:16px; top:16px; padding:5px 10px; border-radius:999px;
+    background: var(--chip); border:1px solid var(--line); font-size:12px; font-weight: 600; color:var(--brand);
   }
 
   /* Gallery */
   .gallery{
-    display:grid; gap:10px; grid-template-columns: repeat( auto-fit, minmax(220px, 1fr) );
+    display:grid; gap:16px; grid-template-columns: repeat( auto-fit, minmax(240px, 1fr) );
   }
   .frame{
-    overflow:hidden; border-radius:14px; border:1px solid var(--line); aspect-ratio: 16/10;
+    overflow:hidden; border-radius:18px; border:1px solid var(--line); aspect-ratio: 4/3;
     background:var(--panel);
   }
-  .frame img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .frame img{ width:100%; height:100%; object-fit:cover; display:block; transition: transform .3s ease; }
+  .frame:hover img { transform: scale(1.05); }
 
   /* Timeline */
-  .timeline{ display:grid; gap:10px; }
+  .timeline{ display:grid; gap:12px; }
   .t{
-    background:var(--panel); border:1px solid var(--line); border-radius:12px; padding:10px 12px;
+    background:var(--panel); border:1px solid var(--line); border-radius:16px; padding:16px 20px;
+    font-size: 16px; display: flex; align-items: center;
   }
-  .t b{ color:var(--brand); margin-right:6px; }
+  .t b{
+    background: var(--brand-2); color: white;
+    padding: 4px 10px;
+    border-radius: 8px;
+    margin-right:12px;
+    font-size: 14px;
+  }
 
   /* Footer */
-  footer{ border-top:1px solid var(--line); color:var(--muted); text-align:center; padding:28px 16px; }
+  footer{ border-top:1px solid var(--line); color:var(--muted); text-align:center; padding:32px 16px; margin-top: 20px; }
 
   /* Responsive */
   @media (max-width: 860px){
     .hero{ grid-template-columns: 1fr; }
+    .hero-img { aspect-ratio: 16/10; }
     .links{ display:none; }
   }
 
   /* Print */
   @media print{
-    .nav, .nav *{ display:none !important; }
+    .nav{ display:none !important; }
     body{ background:#fff; color:#000; }
-    .card,.meal,.t{ border-color:#ccc; }
+    .card,.meal,.t{ border-color:#ccc; box-shadow: none; }
+    .btn { display: none; }
   }
 </style>
 </head>
 <body>
 
-  <!-- ======= NAV ======= -->
-  <div class="nav">
+  <nav class="nav">
     <div class="nav-inner">
       <a class="brand" href="#top">
-        <span class="brand-badge">🌿</span> AIDiet
+        <span class="brand-badge">🌸</span> DietPlan
       </a>
       <div class="links">
         <a href="#foods">Foods</a>
         <a href="#diet">Diet Plan</a>
         <a href="#schedule">Schedule</a>
-        <a href="#gallery">Images</a>
+        <a href="#gallery">Inspiration</a>
       </div>
-      <div class="nav-actions">
-        <div class="theme">
-          <span>Light</span>
-          <label class="switch">
-            <input id="themeToggle" type="checkbox" />
-            <span class="slider"></span>
-          </label>
-          <span>Dark</span>
-        </div>
-        <button class="btn" onclick="window.print()">Print / Save PDF</button>
-      </div>
+      <button class="btn" onclick="window.print()">Print / Save PDF</button>
     </div>
-  </div>
+  </nav>
 
-  <!-- ======= HERO ======= -->
   <header class="hero" id="top">
     <div class="hero-card">
-      <h1>Autoimmune-Friendly Diet Plan</h1>
-      <p>Designed for a 23-year-old female with a 9-5 schedule — focus on steady energy & reduced inflammation.</p>
+      <h1>Your Wellness Diet Plan</h1>
+      <p>A gentle, anti-inflammatory plan designed for a 23-year-old female to nourish, energize, and glow.</p>
       <div class="hero-grid">
         <div class="kpi"><b>Balanced</b><span>Whole foods first</span></div>
-        <div class="kpi"><b>Anti-Inflam.</b><span>Omega-3, spices</span></div>
-        <div class="kpi"><b>Job-Friendly</b><span>Simple prep</span></div>
+        <div class="kpi"><b>Gentle</b><span>Anti-Inflammatory</span></div>
+        <div class="kpi"><b>Simple</b><span>Easy to Prep</span></div>
       </div>
     </div>
     <div class="hero-img">
-      <!-- Online images for visual vibe; safe to remove if offline -->
       <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?q=80&w=1200&auto=format&fit=crop" alt="Fresh healthy food" loading="lazy">
       <div class="hero-badge">Clean • Simple • Nourishing</div>
     </div>
   </header>
 
-  <!-- ======= FOODS ======= -->
   <section class="section" id="foods">
     <div class="title">
-      <h2>🥦 Anti-inflammatory Foods</h2>
-      <p>Jo roz ke meals me asaani se add ho sake.</p>
+      <h2>🥦 Nourishing Foods</h2>
+      <p>Incorporate these anti-inflammatory foods into your daily meals.</p>
     </div>
 
     <div class="cards">
       <article class="card">
         <h3>Healthy Fats</h3>
         <div class="chips">
-          <span class="chip">Olive oil</span>
-          <span class="chip">Mustard oil (kam)</span>
-          <span class="chip">Avocado</span>
-          <span class="chip">Flax seeds</span>
-          <span class="chip">Chia seeds</span>
-          <span class="chip">Walnuts</span>
+          <span class="chip">Olive oil</span> <span class="chip">Avocado</span> <span class="chip">Flax seeds</span> <span class="chip">Chia seeds</span> <span class="chip">Walnuts</span>
         </div>
       </article>
 
       <article class="card">
         <h3>Fruits</h3>
         <div class="chips">
-          <span class="chip">Berries</span>
-          <span class="chip">Papaya</span>
-          <span class="chip">Apple</span>
-          <span class="chip">Orange</span>
-          <span class="chip">Guava</span>
+          <span class="chip">Berries</span> <span class="chip">Papaya</span> <span class="chip">Apple</span> <span class="chip">Orange</span> <span class="chip">Guava</span>
         </div>
       </article>
 
       <article class="card">
         <h3>Vegetables</h3>
         <div class="chips">
-          <span class="chip">Broccoli</span>
-          <span class="chip">Spinach</span>
-          <span class="chip">Kale</span>
-          <span class="chip">Beetroot</span>
-          <span class="chip">Carrot</span>
-          <span class="chip">Cucumber</span>
+          <span class="chip">Broccoli</span> <span class="chip">Spinach</span> <span class="chip">Kale</span> <span class="chip">Beetroot</span> <span class="chip">Carrot</span> <span class="chip">Cucumber</span>
         </div>
       </article>
 
       <article class="card">
         <h3>Spices</h3>
         <div class="chips">
-          <span class="chip">Haldi (turmeric)</span>
-          <span class="chip">Adrak (ginger)</span>
-          <span class="chip">Lahsun (garlic)</span>
+          <span class="chip">Turmeric</span> <span class="chip">Ginger</span> <span class="chip">Garlic</span>
         </div>
       </article>
 
       <article class="card">
-        <h3>Protein</h3>
+        <h3>Lean Protein</h3>
         <div class="chips">
-          <span class="chip">Egg</span>
-          <span class="chip">Salmon</span>
-          <span class="chip">Sardines</span>
-          <span class="chip">Mackerel</span>
-          <span class="chip">Chicken (grilled/boiled)</span>
+          <span class="chip">Egg</span> <span class="chip">Salmon</span> <span class="chip">Sardines</span> <span class="chip">Mackerel</span> <span class="chip">Chicken (grilled/boiled)</span>
         </div>
       </article>
 
       <article class="card">
         <h3>Whole Grains</h3>
         <div class="chips">
-          <span class="chip">Oats</span>
-          <span class="chip">Quinoa</span>
-          <span class="chip">Brown rice</span>
-          <span class="chip">Multigrain roti</span>
+          <span class="chip">Oats</span> <span class="chip">Quinoa</span> <span class="chip">Brown rice</span> <span class="chip">Multigrain roti</span>
         </div>
       </article>
 
       <article class="card">
         <h3>Fermented Foods</h3>
         <div class="chips">
-          <span class="chip">Curd</span>
-          <span class="chip">Buttermilk</span>
-          <span class="chip">Idli</span>
-          <span class="chip">Dosa</span>
+          <span class="chip">Curd</span> <span class="chip">Buttermilk</span> <span class="chip">Idli</span> <span class="chip">Dosa</span>
         </div>
       </article>
     </div>
   </section>
 
-  <!-- ======= DIET PLAN ======= -->
   <section class="section" id="diet">
     <div class="title">
-      <h2>🍽 Your Autoimmune-friendly Diet Plan</h2>
-      <p>Non-veg included; options simple & practical.</p>
+      <h2>🍽 Your Daily Meal Plan</h2>
+      <p>Simple, practical, and delicious options for your 9-5 schedule.</p>
     </div>
 
     <div class="meal-grid">
-      <article class="meal"><span class="tag">7:00 AM</span>
-        <h3>🌅 Morning</h3>
-        <ul>
-          <li>Warm water with lemon</li>
-          <li>4 soaked almonds + 1 walnut</li>
-        </ul>
-      </article>
+        <article class="meal"><span class="tag">7:00 AM</span>
+            <h3>🌅 Morning Start</h3>
+            <ul>
+              <li>Warm water with lemon</li>
+              <li>4 soaked almonds + 1 walnut</li>
+            </ul>
+        </article>
 
-      <article class="meal"><span class="tag">8:30 AM</span>
-        <h3>🥣 Breakfast</h3>
-        <ul>
-          <li>Option 1: Vegetable oats / poha / upma + 1 boiled egg</li>
-          <li>Option 2: 2 multigrain roti + sabzi + curd</li>
-          <li>1 cup green tea / herbal tea</li>
-        </ul>
-      </article>
+        <article class="meal"><span class="tag">8:30 AM</span>
+            <h3>🥣 Breakfast</h3>
+            <ul>
+              <li><b>Option 1:</b> Vegetable oats / poha / upma + 1 boiled egg</li>
+              <li><b>Option 2:</b> 2 multigrain roti + sabzi + curd</li>
+              <li>1 cup green tea / herbal tea</li>
+            </ul>
+        </article>
 
-      <article class="meal"><span class="tag">11:00 AM</span>
-        <h3>🍎 Mid-morning Snack</h3>
-        <ul>
-          <li>1 fruit (papaya / apple / orange)</li>
-          <li>Handful roasted seeds (pumpkin / sunflower / flax)</li>
-        </ul>
-      </article>
+        <article class="meal"><span class="tag">11:00 AM</span>
+            <h3>🍎 Mid-morning Snack</h3>
+            <ul>
+              <li>1 fruit (papaya / apple / orange)</li>
+              <li>Handful roasted seeds (pumpkin / sunflower)</li>
+            </ul>
+        </article>
 
-      <article class="meal"><span class="tag">1:30 PM</span>
-        <h3>🍛 Lunch</h3>
-        <ul>
-          <li>2 multigrain rotis / 1 bowl brown rice</li>
-          <li>Dal / chana / rajma</li>
-          <li>Seasonal sabzi (broccoli, spinach, beetroot etc.)</li>
-          <li>Salad (cucumber, carrot, tomato)</li>
-          <li>1 bowl curd</li>
-        </ul>
-      </article>
+        <article class="meal"><span class="tag">1:30 PM</span>
+            <h3>🍛 Lunch</h3>
+            <ul>
+              <li>2 multigrain rotis / 1 bowl brown rice</li>
+              <li>Dal / chana / rajma</li>
+              <li>Seasonal sabzi (broccoli, spinach, etc.)</li>
+              <li>Fresh salad (cucumber, carrot, tomato)</li>
+            </ul>
+        </article>
 
-      <article class="meal"><span class="tag">4:30–5:00 PM</span>
-        <h3>☕ Evening Snack</h3>
-        <ul>
-          <li>Roasted makhana / chana</li>
-          <li>1 cup green tea</li>
-        </ul>
-      </article>
+        <article class="meal"><span class="tag">4:30 PM</span>
+            <h3>☕ Evening Snack</h3>
+            <ul>
+              <li>Roasted makhana / chana</li>
+              <li>1 cup green tea</li>
+            </ul>
+        </article>
 
-      <article class="meal"><span class="tag">8:00 PM</span>
-        <h3>🍲 Dinner</h3>
-        <ul>
-          <li>Option 1: Soup + grilled veggies + 1 boiled egg / grilled chicken</li>
-          <li>Option 2: 2 rotis + sabzi + dal</li>
-          <li>Option 3: Grilled/steamed salmon or mackerel + sautéed veggies (1–2×/week)</li>
-        </ul>
-      </article>
-
-      <article class="meal"><span class="tag">10:30 PM</span>
-        <h3>🌙 Bedtime</h3>
-        <ul>
-          <li>Warm haldi milk (if it suits you)</li>
-        </ul>
-      </article>
+        <article class="meal"><span class="tag">8:00 PM</span>
+            <h3>🍲 Dinner</h3>
+            <ul>
+              <li><b>Option 1:</b> Soup + grilled veggies + egg / grilled chicken</li>
+              <li><b>Option 2:</b> 2 rotis + sabzi + dal</li>
+              <li><b>Option 3:</b> Grilled salmon + sautéed veggies (1-2x/week)</li>
+            </ul>
+        </article>
     </div>
   </section>
 
-  <!-- ======= DAILY SCHEDULE ======= -->
   <section class="section" id="schedule">
     <div class="title">
-      <h2>🗓 9–5 Job-friendly Daily Schedule</h2>
-      <p>Chhote steps, big consistency.</p>
+      <h2>🗓 Daily Flow & Schedule</h2>
+      <p>Small, consistent steps for a balanced day.</p>
     </div>
     <div class="timeline">
-      <div class="t"><b>7:00</b> Wake up, warm water, light stretch</div>
-      <div class="t"><b>7:30</b> Walk / Yoga / Light workout (20–30 min)</div>
-      <div class="t"><b>8:30</b> Breakfast</div>
-      <div class="t"><b>11:00</b> Fruit + seeds</div>
-      <div class="t"><b>1:30</b> Lunch</div>
-      <div class="t"><b>4:45</b> Snack + 5-minute stroll</div>
-      <div class="t"><b>6:15</b> Light stretching / short walk</div>
-      <div class="t"><b>8:00</b> Dinner</div>
-      <div class="t"><b>10:30</b> Wind down, haldi milk, sleep routine</div>
+      <div class="t"><b>7:00 AM</b> Wake up, warm water, light stretch</div>
+      <div class="t"><b>7:30 AM</b> Walk / Yoga / Light workout (20–30 min)</div>
+      <div class="t"><b>8:30 AM</b> Breakfast</div>
+      <div class="t"><b>11:00 AM</b> Fruit + seeds</div>
+      <div class="t"><b>1:30 PM</b> Lunch</div>
+      <div class="t"><b>4:45 PM</b> Snack + 5-minute stroll</div>
+      <div class="t"><b>6:15 PM</b> Light stretching / short walk</div>
+      <div class="t"><b>8:00 PM</b> Dinner</div>
+      <div class="t"><b>10:30 PM</b> Wind down, chamomile tea, sleep routine</div>
     </div>
   </section>
 
-  <!-- ======= IMAGE GALLERY ======= -->
   <section class="section" id="gallery">
     <div class="title">
       <h2>📸 Visual Inspiration</h2>
-      <p>Some clean, healthy vibes.</p>
+      <p>For some clean, healthy vibes.</p>
     </div>
     <div class="gallery">
       <figure class="frame">
-        <img alt="Colorful salad bowl" loading="lazy"
-             src="https://images.unsplash.com/photo-1551218808-94e220e084d2?q=80&w=1200&auto=format&fit=crop">
+        <img alt="Colorful salad bowl" loading="lazy" src="https://images.unsplash.com/photo-1551218808-94e220e084d2?q=80&w=1200&auto=format&fit=crop">
       </figure>
       <figure class="frame">
-        <img alt="Grilled fish and veggies" loading="lazy"
-             src="https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=1200&auto=format&fit=crop">
+        <img alt="Grilled fish and veggies" loading="lazy" src="https://images.unsplash.com/photo-1544025162-d76694265947?q=80&w=1200&auto=format&fit=crop">
       </figure>
       <figure class="frame">
-        <img alt="Overnight oats and fruit" loading="lazy"
-             src="https://images.unsplash.com/photo-1512058564366-18510be2db19?q=80&w=1200&auto=format&fit=crop">
+        <img alt="Overnight oats and fruit" loading="lazy" src="https://images.unsplash.com/photo-1512058564366-18510be2db19?q=80&w=1200&auto=format&fit=crop">
       </figure>
       <figure class="frame">
-        <img alt="Green tea" loading="lazy"
-             src="https://images.unsplash.com/photo-1498654200943-1088dd4438ae?q=80&w=1200&auto=format&fit=crop">
+        <img alt="Herbal tea" loading="lazy" src="https://images.unsplash.com/photo-1556745753-b2904692b3cd?q=80&w=1200&auto=format&fit=crop">
       </figure>
     </div>
   </section>
 
   <footer>
-    Made for you with care • AIDiet 🌿
+    Made for you with care 🌸
   </footer>
-
-<script>
-  // Light/Dark toggle (default: dark)
-  const root = document.documentElement;
-  const toggle = document.getElementById('themeToggle');
-  // If user prefers light, start with light:
-  const preferLight = window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches;
-  if(preferLight){ root.classList.add('light'); toggle.checked = false; } else { toggle.checked = true; }
-
-  toggle.addEventListener('change', ()=>{
-    if(toggle.checked){ root.classList.remove('light'); }
-    else{ root.classList.add('light'); }
-  });
-</script>
 
 </body>
 </html>
